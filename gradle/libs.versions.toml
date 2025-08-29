@@ -8,6 +8,7 @@ kotlinx-coroutines = "1.10.2"
 kotlin-logging = "7.0.13"
 file-kit = "0.10.0"
 spotify-webapi-java = "9.3.0"
+lucide-icons = "1.0.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -22,6 +23,7 @@ filekit-dialogs ={ module = "io.github.vinceglb:filekit-dialogs", version.ref = 
 filekit-dialogs-compose = { module = "io.github.vinceglb:filekit-dialogs-compose", version.ref = "file-kit"}
 filekit-coil = { module = "io.github.vinceglb:filekit-coil", version.ref = "file-kit"}
 spotify-webapi-java = { module = "se.michaelthelin.spotify:spotify-web-api-java", version.ref = "spotify-webapi-java"}
+lucide-icons = { module = "com.composables:icons-lucide", version.ref = "lucide-icons"}
 
 [plugins]
 composeHotReload = { id = "org.jetbrains.compose.hot-reload", version.ref = "composeHotReload" }

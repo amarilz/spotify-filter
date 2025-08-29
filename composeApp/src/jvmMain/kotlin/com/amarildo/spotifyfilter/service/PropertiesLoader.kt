@@ -1,11 +1,12 @@
 package com.amarildo.spotifyfilter.service
 
+import kotlinx.io.IOException
 import java.io.FileInputStream
 import java.util.Properties
-import kotlinx.io.IOException
 
-class PropertiesLoader(private val filePath: String) {
-
+class PropertiesLoader(
+    private val filePath: String,
+) {
     companion object {
         const val SPOTIFY_CLIENT_ID = "spotify.clientId"
         const val SPOTIFY_CLIENT_SECRET = "spotify.clientSecret"
@@ -39,6 +40,7 @@ class PropertiesLoader(private val filePath: String) {
         if (missingKeys.isNotEmpty()) {
             throw IllegalStateException("Mancano le seguenti properties obbligatorie: $missingKeys")
         }
+        // TODO (31/08/2025 - amarildo.aliaj): qui devo validare anche che i valori delle chiavi non siano vuoti
 
         return propsMap
     }

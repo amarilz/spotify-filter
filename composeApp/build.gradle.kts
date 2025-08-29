@@ -21,12 +21,12 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
 
-            implementation(libs.kotlin.logging.jvm)
             implementation(libs.filekit.core)
             implementation(libs.filekit.dialogs)
             implementation(libs.filekit.dialogs.compose)
             implementation(libs.filekit.coil)
             implementation(libs.spotify.webapi.java)
+            implementation(libs.lucide.icons)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -40,12 +40,12 @@ kotlin {
 
 compose.desktop {
     application {
-        mainClass = "com.amarildo.spotifyblock.MainKt"
+        mainClass = "com.amarildo.spotifyfilter.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "com.amarildo.spotifyfilter"
-            packageVersion = "1.0.0"
+            packageVersion = "1.1.0"
         }
     }
 }

@@ -1,14 +1,11 @@
 package com.amarildo.spotifyfilter.service
 
-import io.github.oshai.kotlinlogging.KotlinLogging
-import java.net.URI
 import se.michaelthelin.spotify.SpotifyApi
 import se.michaelthelin.spotify.SpotifyHttpManager
 import se.michaelthelin.spotify.model_objects.credentials.AuthorizationCodeCredentials
 import se.michaelthelin.spotify.requests.authorization.authorization_code.AuthorizationCodeRequest
 import se.michaelthelin.spotify.requests.authorization.authorization_code.AuthorizationCodeUriRequest
-
-private val log = KotlinLogging.logger {}
+import java.net.URI
 
 class SpotifyHandler(
     private val clientId: String?,
