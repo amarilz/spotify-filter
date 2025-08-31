@@ -1,14 +1,17 @@
 package com.amarildo.spotifyfilter.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.amarildo.spotifyfilter.data.repository.FileStorageRepository
 import com.amarildo.spotifyfilter.service.FileLocator
 import com.amarildo.spotifyfilter.service.PlaylistService
 import com.amarildo.spotifyfilter.service.PropertiesLoader
 import com.amarildo.spotifyfilter.service.SpotifyHandler
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.io.IOException
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import se.michaelthelin.spotify.SpotifyApi
 
 class MyViewModel : ViewModel() {
@@ -126,36 +129,42 @@ class MyViewModel : ViewModel() {
             currentStep = ProcessStep.Processing,
         )
 
-        try {
-            fileStorageRepository = FileStorageRepository(currentState.databaseFilePath)
-            val tokenApi: SpotifyApi = spotifyHandler?.getTokenApi(currentState.browserUrl)
-                ?: throw IllegalStateException("Spotify handler not initialized")
+        // esegui l'operazione in una coroutine per non bloccare la UI
+        viewModelScope.launch {
+            try {
+                // Operazioni che potrebbero essere pesanti, eseguite in background
+                val result = withContext(Dispatchers.IO) {
+                    fileStorageRepository = FileStorageRepository(currentState.databaseFilePath)
+                    val tokenApi: SpotifyApi = spotifyHandler?.getTokenApi(currentState.browserUrl)
+                        ?: throw IllegalStateException("Spotify handler not initialized")
 
-            val blockPlaylistId: String = properties[PropertiesLoader.SPOTIFY_PLAYLIST_BLOCK]
-                ?: throw IllegalStateException("Block playlist ID not found")
-            val listenPlaylistId: String = properties[PropertiesLoader.SPOTIFY_PLAYLIST_LISTEN]
-                ?: throw IllegalStateException("Listen playlist ID not found")
+                    val blockPlaylistId: String = properties[PropertiesLoader.SPOTIFY_PLAYLIST_BLOCK]
+                        ?: throw IllegalStateException("Block playlist ID not found")
+                    val listenPlaylistId: String = properties[PropertiesLoader.SPOTIFY_PLAYLIST_LISTEN]
+                        ?: throw IllegalStateException("Listen playlist ID not found")
 
-            val result: String = PlaylistService(tokenApi, fileStorageRepository)
-                .run(blockPlaylistId, listenPlaylistId)
+                    PlaylistService(tokenApi, fileStorageRepository)
+                        .run(blockPlaylistId, listenPlaylistId)
+                }
 
-            _uiState.value = _uiState.value.copy(
-                isLoading = false,
-                currentStep = ProcessStep.Completed,
-                successMessage = result,
-            )
-        } catch (e: IllegalStateException) {
-            _uiState.value = _uiState.value.copy(
-                isLoading = false,
-                currentStep = ProcessStep.TokenReceived, // Torna indietro per permettere di correggere
-                error = "Configuration error: ${e.message}",
-            )
-        } catch (e: Exception) {
-            _uiState.value = _uiState.value.copy(
-                isLoading = false,
-                currentStep = ProcessStep.TokenReceived, // Torna indietro per permettere di riprovare
-                error = "Processing error: ${e.message}",
-            )
+                _uiState.value = _uiState.value.copy(
+                    isLoading = false,
+                    currentStep = ProcessStep.Completed,
+                    successMessage = result,
+                )
+            } catch (e: IllegalStateException) {
+                _uiState.value = _uiState.value.copy(
+                    isLoading = false,
+                    currentStep = ProcessStep.TokenReceived, // Torna indietro per permettere di correggere
+                    error = "Configuration error: ${e.message}",
+                )
+            } catch (e: Exception) {
+                _uiState.value = _uiState.value.copy(
+                    isLoading = false,
+                    currentStep = ProcessStep.TokenReceived, // Torna indietro per permettere di riprovare
+                    error = "Processing error: ${e.message}",
+                )
+            }
         }
     }
 
