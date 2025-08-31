@@ -35,12 +35,17 @@ class PropertiesLoader(
         val propsMap = props.stringPropertyNames()
             .associateWith { props.getProperty(it) }
 
-        // Validazione delle chiavi richieste
+        // config validation
         val missingKeys = REQUIRED_KEYS.filter { !propsMap.containsKey(it) }
         if (missingKeys.isNotEmpty()) {
             throw IllegalStateException("Mancano le seguenti properties obbligatorie: $missingKeys")
         }
-        // TODO (31/08/2025 - amarildo.aliaj): qui devo validare anche che i valori delle chiavi non siano vuoti
+
+        propsMap.forEach { (k, v) ->
+            if (v.isBlank()) {
+                throw IllegalStateException("La properties $k non é valorizzata")
+            }
+        }
 
         return propsMap
     }
