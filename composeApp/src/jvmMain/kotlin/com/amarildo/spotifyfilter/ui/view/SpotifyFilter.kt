@@ -79,7 +79,7 @@ fun SpotifyFilter(vm: MyViewModel = viewModel()) {
             uiState.successMessage?.let { msg ->
                 snackbarHostState.showSnackbar(
                     message = msg,
-                    duration = SnackbarDuration.Short,
+                    duration = SnackbarDuration.Long,
                 )
                 vm.clearMessage()
             }

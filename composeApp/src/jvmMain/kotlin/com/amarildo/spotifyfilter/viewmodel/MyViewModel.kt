@@ -136,13 +136,13 @@ class MyViewModel : ViewModel() {
             val listenPlaylistId: String = properties[PropertiesLoader.SPOTIFY_PLAYLIST_LISTEN]
                 ?: throw IllegalStateException("Listen playlist ID not found")
 
-            PlaylistService(tokenApi, fileStorageRepository)
+            val result: String = PlaylistService(tokenApi, fileStorageRepository)
                 .run(blockPlaylistId, listenPlaylistId)
 
             _uiState.value = _uiState.value.copy(
                 isLoading = false,
                 currentStep = ProcessStep.Completed,
-                successMessage = "Playlist processing completed successfully!",
+                successMessage = result,
             )
         } catch (e: IllegalStateException) {
             _uiState.value = _uiState.value.copy(
