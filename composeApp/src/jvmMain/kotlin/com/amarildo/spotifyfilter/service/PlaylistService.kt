@@ -18,13 +18,13 @@ class PlaylistService(
     fun run(
         blockPlaylistId: String,
         listenPlaylistId: String,
-    ) {
+    ): String {
         val blockLocalTracks: MutableSet<LocalTrack> = fetchAllTracksFromPlaylist(blockPlaylistId)
         val listenedLocalTracks: MutableSet<LocalTrack> = fileStorageRepository.loadListenedSongs()
         val newLocalTracks: MutableSet<LocalTrack> = getNewTracks(blockLocalTracks, listenedLocalTracks)
 
         if (newLocalTracks.isEmpty()) {
-            return
+            return "No new tracks ot ouf ${blockLocalTracks.size} from BLOCK playlist"
         }
 
         try {
@@ -36,6 +36,7 @@ class PlaylistService(
         fileStorageRepository.backupSongs(listenedLocalTracks)
         listenedLocalTracks.addAll(newLocalTracks)
         fileStorageRepository.saveAllSongs(listenedLocalTracks)
+        return "New tracks: ${newLocalTracks.size} ot ouf ${blockLocalTracks.size} from BLOCK playlist"
     }
 
     private fun fetchAllTracksFromPlaylist(playlistId: String): MutableSet<LocalTrack> {
@@ -48,15 +49,11 @@ class PlaylistService(
                 break
             }
 
-            val itemsBefore: Int = result.size
-
             page.items.asSequence()
                 .map { it.track }
                 .filter { t -> t is Track }
                 .map { t -> (t as Track).toLocalTrack() }
                 .forEach { result.add(it) }
-
-            val itemAfter: Int = result.size
 
             offset += page.items.size
             if (offset >= page.total) {
@@ -66,19 +63,14 @@ class PlaylistService(
         return result
     }
 
+    @Throws(Exception::class)
     private fun getPlaylistTracks(
         playlistId: String,
         offset: Int,
-    ): Paging<PlaylistTrack>? {
-        try {
-            return spotifyApi.getPlaylistsItems(playlistId)
-                .offset(offset)
-                .build()
-                .execute()
-        } catch (ex: Exception) {
-            return null
-        }
-    }
+    ): Paging<PlaylistTrack>? = spotifyApi.getPlaylistsItems(playlistId)
+        .offset(offset)
+        .build()
+        .execute()
 
     private fun getNewTracks(
         blockLocalTracks: MutableSet<LocalTrack>,
