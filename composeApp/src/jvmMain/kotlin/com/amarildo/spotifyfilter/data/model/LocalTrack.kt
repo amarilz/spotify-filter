@@ -10,7 +10,8 @@ class LocalTrack(
     var uniqueId: String
 
     init {
-        this.uniqueId = (singer + title).replace("\\s+", "")
+        this.uniqueId = (singer + title)
+            .replace("\\s+".toRegex(), "")
     }
 
     constructor(uniqueId: String) : this("", "", "") {
@@ -26,19 +27,13 @@ class LocalTrack(
         return uniqueId == other.uniqueId
     }
 
-    override fun hashCode(): Int {
-        return uniqueId.hashCode()
-    }
+    override fun hashCode(): Int = uniqueId.hashCode()
 
-    override fun toString(): String {
-        return "LocalTrack(uniqueId=$uniqueId)"
-    }
+    override fun toString(): String = "LocalTrack(uniqueId=$uniqueId)"
 }
 
-fun Track.toLocalTrack(): LocalTrack {
-    return LocalTrack(
-        this.artists[0].name,
-        this.name,
-        this.uri
-    )
-}
+fun Track.toLocalTrack(): LocalTrack = LocalTrack(
+    this.artists[0].name,
+    this.name,
+    this.uri,
+)
