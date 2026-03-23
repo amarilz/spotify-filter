@@ -1,12 +1,12 @@
-package com.amarildo.spotifyfilter.viewmodel
+package com.amarildoaliaj.spotifyfreshorcry.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.amarildo.spotifyfilter.data.repository.FileStorageRepository
-import com.amarildo.spotifyfilter.service.FileLocator
-import com.amarildo.spotifyfilter.service.PlaylistService
-import com.amarildo.spotifyfilter.service.PropertiesLoader
-import com.amarildo.spotifyfilter.service.SpotifyHandler
+import com.amarildoaliaj.spotifyfreshorcry.data.repository.FileStorageRepository
+import com.amarildoaliaj.spotifyfreshorcry.service.FileLocator
+import com.amarildoaliaj.spotifyfreshorcry.service.PlaylistService
+import com.amarildoaliaj.spotifyfreshorcry.service.PropertiesLoader
+import com.amarildoaliaj.spotifyfreshorcry.service.SpotifyHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -58,8 +58,11 @@ class MyViewModel : ViewModel() {
 
         when (currentState.currentStep) {
             ProcessStep.Initial -> loadConfiguration()
+
             ProcessStep.ConfigurationLoaded -> getBrowserAuthorization()
+
             ProcessStep.TokenReceived -> finalizePlaylist()
+
             else -> {
                 // no action needed for Processing/Completed
             }
@@ -153,12 +156,14 @@ class MyViewModel : ViewModel() {
                     successMessage = result,
                 )
             } catch (e: IllegalStateException) {
+                e.printStackTrace()
                 _uiState.value = _uiState.value.copy(
                     isLoading = false,
                     currentStep = ProcessStep.TokenReceived, // Torna indietro per permettere di correggere
                     error = "Configuration error: ${e.message}",
                 )
             } catch (e: Exception) {
+                e.printStackTrace()
                 _uiState.value = _uiState.value.copy(
                     isLoading = false,
                     currentStep = ProcessStep.TokenReceived, // Torna indietro per permettere di riprovare

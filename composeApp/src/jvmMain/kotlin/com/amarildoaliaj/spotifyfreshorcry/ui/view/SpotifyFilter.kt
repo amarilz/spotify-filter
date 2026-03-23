@@ -1,4 +1,4 @@
-package com.amarildo.spotifyfilter.ui.view
+package com.amarildoaliaj.spotifyfreshorcry.ui.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -46,10 +46,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.amarildo.spotifyfilter.ui.theme.SpotifyFilterTheme
-import com.amarildo.spotifyfilter.viewmodel.MyViewModel
-import com.amarildo.spotifyfilter.viewmodel.ProcessStep
-import com.amarildo.spotifyfilter.viewmodel.UiState
+import com.amarildoaliaj.spotifyfreshorcry.ui.theme.SpotifyFilterTheme
+import com.amarildoaliaj.spotifyfreshorcry.viewmodel.MyViewModel
+import com.amarildoaliaj.spotifyfreshorcry.viewmodel.ProcessStep
+import com.amarildoaliaj.spotifyfreshorcry.viewmodel.UiState
 import com.composables.icons.lucide.Check
 import com.composables.icons.lucide.Database
 import com.composables.icons.lucide.Delete

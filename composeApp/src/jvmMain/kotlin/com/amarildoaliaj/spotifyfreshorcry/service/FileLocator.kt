@@ -1,7 +1,6 @@
-package com.amarildo.spotifyfilter.service
+package com.amarildoaliaj.spotifyfreshorcry.service
 
 import io.github.vinceglb.filekit.FileKit
-import io.github.vinceglb.filekit.dialogs.openDirectoryPicker
 import io.github.vinceglb.filekit.dialogs.openFilePicker
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

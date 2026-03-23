@@ -1,4 +1,4 @@
-package com.amarildo.spotifyfilter.ui.theme
+package com.amarildoaliaj.spotifyfreshorcry.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

@@ -1,4 +1,4 @@
-package com.amarildo.spotifyfilter.ui.theme
+package com.amarildoaliaj.spotifyfreshorcry.ui.theme
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.staticCompositionLocalOf
