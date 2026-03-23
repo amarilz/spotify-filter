@@ -1,4 +1,4 @@
-# Spotify Filter (Kotlin Multiplatform)
+### SpotifyFreshOrCry
 
 Short description:
  - The application manages two playlists, `BLOCK` and `LISTEN`, created by the user and configured via `application.properties`. It scans `BLOCK`, ignores anything you’ve already heard, and dumps only the fresh stuff into `LISTEN` because life’s too short to keep replaying the same songs.

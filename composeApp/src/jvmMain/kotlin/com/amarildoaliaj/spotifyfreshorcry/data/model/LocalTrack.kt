@@ -1,4 +1,4 @@
-package com.amarildo.spotifyfilter.data.model
+package com.amarildoaliaj.spotifyfreshorcry.data.model
 
 import se.michaelthelin.spotify.model_objects.specification.Track
 

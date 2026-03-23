@@ -1,8 +1,8 @@
-package com.amarildo.spotifyfilter.service
+package com.amarildoaliaj.spotifyfreshorcry.service
 
-import com.amarildo.spotifyfilter.data.model.LocalTrack
-import com.amarildo.spotifyfilter.data.model.toLocalTrack
-import com.amarildo.spotifyfilter.data.repository.FileStorageRepository
+import com.amarildoaliaj.spotifyfreshorcry.data.model.LocalTrack
+import com.amarildoaliaj.spotifyfreshorcry.data.model.toLocalTrack
+import com.amarildoaliaj.spotifyfreshorcry.data.repository.FileStorageRepository
 import com.google.gson.JsonArray
 import com.google.gson.JsonPrimitive
 import org.slf4j.LoggerFactory

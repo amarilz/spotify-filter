@@ -1,4 +1,4 @@
-package com.amarildo.spotifyfilter.service
+package com.amarildoaliaj.spotifyfreshorcry.service
 
 import se.michaelthelin.spotify.SpotifyApi
 import se.michaelthelin.spotify.SpotifyHttpManager
