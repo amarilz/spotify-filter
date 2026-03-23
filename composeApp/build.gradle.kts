@@ -40,12 +40,12 @@ kotlin {
 
 compose.desktop {
     application {
-        mainClass = "com.amarildo.spotifyfilter.MainKt"
+        mainClass = "com.amarildoaliaj.spotifyfreshorcry.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.amarildo.spotifyfilter"
-            packageVersion = "1.1.2"
+            packageName = "com.amarildoaliaj.spotifyfreshorcry"
+            packageVersion = "1.1.3"
         }
     }
 }
