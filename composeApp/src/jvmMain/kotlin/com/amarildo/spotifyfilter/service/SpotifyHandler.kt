@@ -11,7 +11,7 @@ class SpotifyHandler(
     private val clientId: String?,
     private val clientSecret: String?,
     private val redirectUri: String = "https://www.google.com/",
-    private val scope: String = "playlist-modify-public",
+    private val scope: String = "playlist-modify-public,playlist-modify-private,playlist-read-private",
 ) {
     private val spotifyApi: SpotifyApi
 

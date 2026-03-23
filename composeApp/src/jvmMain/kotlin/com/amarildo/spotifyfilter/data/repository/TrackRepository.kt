@@ -6,5 +6,4 @@ interface TrackRepository {
 
     fun loadListenedSongs(): MutableSet<LocalTrack>
     fun saveAllSongs(localTracks: MutableSet<LocalTrack>)
-    fun backupSongs(localTracks: MutableSet<LocalTrack>)
 }
