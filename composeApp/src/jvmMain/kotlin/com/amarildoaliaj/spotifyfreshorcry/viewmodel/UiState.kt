@@ -1,4 +1,4 @@
-package com.amarildo.spotifyfilter.viewmodel
+package com.amarildoaliaj.spotifyfreshorcry.viewmodel
 
 sealed class ProcessStep {
     object Initial : ProcessStep()
@@ -20,9 +20,14 @@ data class UiState(
     val canProceedToNext: Boolean
         get() = when (currentStep) {
             ProcessStep.Initial -> configurationFilePath.isNotBlank()
-            ProcessStep.ConfigurationLoaded -> true // Automatico dopo il caricamento config
+
+            ProcessStep.ConfigurationLoaded -> true
+
+            // Automatico dopo il caricamento config
             ProcessStep.TokenReceived -> databaseFilePath.isNotBlank() && browserUrl.isNotBlank()
+
             ProcessStep.Processing -> false
+
             ProcessStep.Completed -> false
         }
 

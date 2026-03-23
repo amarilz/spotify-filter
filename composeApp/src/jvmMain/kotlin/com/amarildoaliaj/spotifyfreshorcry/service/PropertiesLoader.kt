@@ -1,4 +1,4 @@
-package com.amarildo.spotifyfilter.service
+package com.amarildoaliaj.spotifyfreshorcry.service
 
 import kotlinx.io.IOException
 import java.io.FileInputStream

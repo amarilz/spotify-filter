@@ -1,8 +1,8 @@
-package com.amarildo.spotifyfilter
+package com.amarildoaliaj.spotifyfreshorcry
 
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import com.amarildo.spotifyfilter.ui.view.SpotifyFilter
+import com.amarildoaliaj.spotifyfreshorcry.ui.view.SpotifyFilter
 
 fun main() = application {
     Window(
